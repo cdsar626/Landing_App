@@ -1,0 +1,89 @@
+---
+---
+
+<section id="waitlist" class="waitlist-section">
+  <div class="container">
+    <div class="form-wrapper glass-panel">
+      <div class="text-content">
+        <h2>Únete a la <span class="gradient-text">Beta Exclusiva</span></h2>
+        <p>Sé de los primeros en probar la experiencia. Los usuarios fundadores recibirán un ítem exclusivo para su Avatar.</p>
+      </div>
+      
+      <form class="signup-form" onsubmit="event.preventDefault(); alert('¡Gracias por registrarte! Te mantendremos informado.');">
+        <div class="input-group">
+          <input type="email" placeholder="Tu correo electrónico" required class="input-field" />
+        </div>
+        
+        <div class="input-group">
+          <input type="text" placeholder="Ciudad / Estado" required class="input-field" />
+        </div>
+
+        <button type="submit" class="btn-primary submit-btn">
+          Registrarme
+        </button>
+      </form>
+
+      <p class="privacy-note">No spam. Solo updates importantes.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .waitlist-section {
+    padding: var(--section-spacing) 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .form-wrapper {
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    box-shadow: 0 0 60px rgba(139, 92, 246, 0.15);
+  }
+
+  .text-content {
+    margin-bottom: 2rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .input-field {
+    width: 100%;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-sm);
+    color: white;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+  }
+
+  .input-field:focus {
+    outline: none;
+    border-color: var(--color-primary);
+  }
+
+  .submit-btn {
+    width: 100%;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+  }
+
+  .privacy-note {
+    margin-top: 1.5rem;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+  }
+</style>

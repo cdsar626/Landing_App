@@ -1,0 +1,168 @@
+---
+---
+
+<section class="hero-section">
+  <div class="container hero-content">
+    <div class="badge">Slow Dating Revolution</div>
+    <h1 class="hero-title">
+      Conecta como cuando <br/>
+      <span class="gradient-text">éramos niños.</span>
+    </h1>
+    <p class="hero-subtitle">
+      Sin prejuicios. Jugando. Una app para buscar pareja (o amistades) basada en la esencia, 
+      recuperando la naturalidad de conocerse sin juzgar la apariencia primero.
+    </p>
+    
+    <div class="cta-group">
+      <a href="#waitlist" class="btn-primary">Únete al Pool</a>
+      <a href="#features" class="btn-secondary">Cómo funciona</a>
+    </div>
+
+    <div class="hero-visual">
+       <!-- Abstract Avatar Representation -->
+       <div class="avatar-circle">
+          <div class="avatar-face"></div>
+          <div class="voice-wave"></div>
+       </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, rgba(5, 5, 5, 0) 70%);
+    z-index: -1;
+  }
+
+  .hero-content {
+    text-align: center;
+    max-width: 800px;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 2rem;
+    font-size: 0.875rem;
+    color: var(--color-primary);
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-subtitle {
+    font-size: 1.125rem;
+    color: var(--color-text-muted);
+    margin-bottom: 2.5rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 4rem;
+  }
+
+  .btn-secondary {
+    padding: 0.75rem 2rem;
+    color: var(--color-text-main);
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 9999px;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--color-text-main);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  /* Abstract Visual */
+  .hero-visual {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .avatar-circle {
+    width: 150px;
+    height: 150px;
+    background: linear-gradient(135deg, #1e1e1e, #121212);
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0 0 40px rgba(139, 92, 246, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .avatar-face {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    background: var(--gradient-main);
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    opacity: 0.8;
+  }
+
+  .voice-wave {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: 50%;
+    animation: pulse 3s infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+  }
+
+  @keyframes pulse {
+    0% { width: 150px; height: 150px; opacity: 0.5; }
+    100% { width: 250px; height: 250px; opacity: 0; }
+  }
+
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: 2.5rem;
+    }
+  }
+</style>

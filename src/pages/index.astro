@@ -1,0 +1,26 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import Features from '../components/Features.astro';
+import Philosophy from '../components/Philosophy.astro';
+import WaitlistForm from '../components/WaitlistForm.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="SlowMatch - Conexiones Reales">
+	<main>
+		<Hero />
+		<Philosophy />
+		<Features />
+		<WaitlistForm />
+	</main>
+	<Footer />
+</Layout>
+
+<style>
+	main {
+		width: 100%;
+		position: relative;
+		z-index: 1;
+	}
+</style>

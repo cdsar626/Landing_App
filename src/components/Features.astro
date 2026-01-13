@@ -1,0 +1,109 @@
+---
+---
+
+<section id="features" class="features-section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Rediseñando las <span class="gradient-text">Citas</span></h2>
+      <p class="section-desc">Olvídate del swipe infinito. Solo lo que importa.</p>
+    </div>
+
+    <div class="features-grid">
+      <!-- Feature 1 -->
+      <div class="feature-card">
+        <div class="icon-box">🎭</div>
+        <h3>Identidad Visual</h3>
+        <p>Cero prejuicios. Tu primera impresión es un Avatar o Mascota personalizable que evoluciona contigo.</p>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="feature-card">
+        <div class="icon-box">🎙️</div>
+        <h3>Tu Voz, Tu Esencia</h3>
+        <p>Preséntate con una nota de voz libre. Sin guiones. Deja que escuchen quién eres realmente.</p>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="feature-card">
+        <div class="icon-box">🎮</div>
+        <h3>Juega para Conectar</h3>
+        <p>Rompe el hielo con minijuegos tipo <i>"¿Qué preferirías?"</i>. Si coinciden, sube la afinidad.</p>
+      </div>
+
+      <!-- Feature 4 -->
+      <div class="feature-card">
+        <div class="icon-box">⏳</div>
+        <h3>Daily Drops Limitados</h3>
+        <p>Calidad > Cantidad. Solo recibirás 1 o 2 matches al día. Cada conexión es una oportunidad que valorar.</p>
+      </div>
+
+      <!-- Feature 5 -->
+      <div class="feature-card">
+        <div class="icon-box">🤖</div>
+        <h3>Matchmaking IA</h3>
+        <p>Sin búsquedas manuales. Nuestro algoritmo híbrido (Tags + IA) encuentra a tu persona ideal.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .features-section {
+    padding: var(--section-spacing) 0;
+    position: relative;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .section-desc {
+    color: var(--color-text-muted);
+    font-size: 1.125rem;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .feature-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-md);
+    padding: 2rem;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--color-primary);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .icon-box {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    display: inline-block;
+    padding: 1rem;
+    background: rgba(139, 92, 246, 0.1);
+    border-radius: 50%;
+  }
+
+  h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+  }
+
+  p {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+  }
+</style>

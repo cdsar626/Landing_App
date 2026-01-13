@@ -1,0 +1,86 @@
+---
+---
+<section class="philosophy-section">
+  <div class="container">
+    <div class="glass-panel manifesto">
+        <h2>Filosofía <span class="highlight">Slow Dating</span></h2>
+        <p>
+          En un mundo de conexiones efímeras, elegimos la permanencia.
+          La conexión dura hasta que tú lo decidas. Sin cronómetros. Sin ansiedad.
+        </p>
+        <div class="stats">
+          <div class="stat-item">
+            <span class="stat-val">∞</span>
+            <span class="stat-label">Tiempo de Match</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-val">100%</span>
+            <span class="stat-label">Privacidad</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-val">Max 2</span>
+            <span class="stat-label">Matches / Día</span>
+          </div>
+        </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .philosophy-section {
+    padding: var(--section-spacing) 0;
+  }
+
+  .manifesto {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    border: 1px solid rgba(var(--color-primary), 0.3);
+    box-shadow: 0 0 50px rgba(0,0,0,0.5);
+  }
+
+  h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .highlight {
+    color: var(--color-primary);
+    font-style: italic;
+  }
+
+  p {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: var(--color-text-muted);
+    margin-bottom: 3rem;
+  }
+
+  .stats {
+    display: flex;
+    justify-content: space-around;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 2rem;
+  }
+
+  .stat-val {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+  }
+
+  .stat-label {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  @media (max-width: 600px) {
+    .stats {
+      flex-direction: column;
+      gap: 2rem;
+    }
+  }
+</style>
