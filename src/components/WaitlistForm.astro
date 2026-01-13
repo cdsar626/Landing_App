@@ -147,35 +147,55 @@ import { countries } from '../utils/countries.js';
        countries.find(c => c.code === 'MX'),
        countries.find(c => c.code === 'ES')
     ];
-    const others = countries.filter(c => !topCodes.includes(c.code)).sort((a,b) => a[lang].localeCompare(b[lang]));
-    const final = [...sortedTop, ...others];
+    const otherList = countries.filter(c => !topCodes.includes(c.code)).sort((a,b) => a[lang].localeCompare(b[lang]));
 
     countryOptions.innerHTML = '';
     
     // Add "Select Country" as internal option too if desired, or skip
-    final.forEach(c => {
-      const div = document.createElement('div');
-      div.className = 'custom-option' + (countryValue.value === c.code ? ' selected' : '');
-      div.textContent = c[lang];
-      div.addEventListener('click', () => {
-        countryValue.value = c.code;
-        countryTriggerText.textContent = c[lang];
-        countryTriggerText.removeAttribute('data-i18n'); // Once selected, it's literal
-        
-        // Logical check for state
-        if (c.code === 'US') {
-          stateGroup.style.display = 'block';
-          stateValue.setAttribute('required', 'true');
-        } else {
-          stateGroup.style.display = 'none';
-          stateValue.removeAttribute('required');
-          stateValue.value = '';
-          stateTriggerText.textContent = t('waitlist.select_state');
-        }
-        countryOptions.classList.remove('open');
-      });
-      countryOptions.appendChild(div);
+    sortedTop.forEach(country => {
+      const opt = document.createElement('div');
+      opt.className = 'custom-option' + (countryValue.value === country.code ? ' selected' : '');
+      opt.textContent = country[lang];
+      opt.addEventListener('click', () => selectCountry(country, lang));
+      countryOptions.appendChild(opt);
     });
+
+    // --- ADD SEPARATOR ---
+    const separator = document.createElement('div');
+    separator.className = 'custom-separator';
+    countryOptions.appendChild(separator);
+
+    otherList.forEach(country => {
+      const opt = document.createElement('div');
+      opt.className = 'custom-option' + (countryValue.value === country.code ? ' selected' : '');
+      opt.textContent = country[lang];
+      opt.addEventListener('click', () => selectCountry(country, lang));
+      countryOptions.appendChild(opt);
+    });
+  }
+
+  function selectCountry(country, lang) {
+    const countryValue = document.getElementById('country-value');
+    const countryTriggerText = document.getElementById('country-trigger-text');
+    const stateGroup = document.getElementById('state-group');
+    const stateValue = document.getElementById('state-value');
+    const stateTriggerText = document.getElementById('state-trigger-text');
+    const countryOptions = document.getElementById('country-options');
+
+    countryValue.value = country.code;
+    countryTriggerText.textContent = country[lang];
+    countryTriggerText.removeAttribute('data-i18n');
+    
+    if (country.code === 'US') {
+      stateGroup.style.display = 'block';
+      stateValue.setAttribute('required', 'true');
+    } else {
+      stateGroup.style.display = 'none';
+      stateValue.removeAttribute('required');
+      stateValue.value = '';
+      stateTriggerText.textContent = t('waitlist.select_state');
+    }
+    countryOptions.classList.remove('open');
   }
 
   // Handle existing state options
@@ -312,6 +332,13 @@ import { countries } from '../utils/countries.js';
     background: rgba(139, 92, 246, 0.2);
     color: #ffffff;
     border-left-color: var(--color-primary);
+  }
+
+  .custom-separator {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 0.5rem 1rem;
+    pointer-events: none;
   }
 
   /* Scrollbar for options */
