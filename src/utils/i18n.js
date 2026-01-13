@@ -1,6 +1,6 @@
 export const translations = {
   es: {
-    "nav.waitlist": "Únete al Pool",
+    "nav.waitlist": "Únete a la lista de interesados",
     "nav.features": "Cómo funciona",
     "hero.badge": "Slow Dating Revolution",
     "hero.title": "Conecta como cuando <br/> <span class='gradient-text'>éramos niños.</span>",
@@ -31,6 +31,10 @@ export const translations = {
     "waitlist.desc": "Sé de los primeros en probar la experiencia. Los usuarios fundadores recibirán un ítem exclusivo.",
     "waitlist.email": "Tu correo electrónico",
     "waitlist.location": "Ciudad / Estado",
+    "waitlist.country": "País",
+    "waitlist.select_country": "Selecciona un país",
+    "waitlist.state": "Estado",
+    "waitlist.select_state": "Selecciona un estado",
     "waitlist.btn": "Registrarme",
     "waitlist.note": "No spam. Solo updates importantes.",
     "footer.rights": "© 2026 SlowMatch. Todos los derechos reservados."
@@ -67,6 +71,10 @@ export const translations = {
     "waitlist.desc": "Be among the first to try it. Founding users will receive an exclusive item for their Avatar.",
     "waitlist.email": "Your email address",
     "waitlist.location": "City / State",
+    "waitlist.country": "Country",
+    "waitlist.select_country": "Select a country",
+    "waitlist.state": "State",
+    "waitlist.select_state": "Select a state",
     "waitlist.btn": "Sign Me Up",
     "waitlist.note": "No spam. Only important updates.",
     "footer.rights": "© 2026 SlowMatch. All rights reserved."
