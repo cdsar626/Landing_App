@@ -5,25 +5,25 @@
   <div class="container">
     <div class="form-wrapper glass-panel">
       <div class="text-content">
-        <h2>Únete a la <span class="gradient-text">Beta Exclusiva</span></h2>
-        <p>Sé de los primeros en probar la experiencia. Los usuarios fundadores recibirán un ítem exclusivo para su Avatar.</p>
+        <h2 data-i18n="waitlist.title">Únete a la <span class="gradient-text">Beta Exclusiva</span></h2>
+        <p data-i18n="waitlist.desc">Sé de los primeros en probar la experiencia. Los usuarios fundadores recibirán un ítem exclusivo para su Avatar.</p>
       </div>
       
       <form class="signup-form" onsubmit="event.preventDefault(); alert('¡Gracias por registrarte! Te mantendremos informado.');">
         <div class="input-group">
-          <input type="email" placeholder="Tu correo electrónico" required class="input-field" />
+          <input type="email" data-i18n-placeholder="waitlist.email" placeholder="Tu correo electrónico" required class="input-field" />
         </div>
         
         <div class="input-group">
-          <input type="text" placeholder="Ciudad / Estado" required class="input-field" />
+          <input type="text" data-i18n-placeholder="waitlist.location" placeholder="Ciudad / Estado" required class="input-field" />
         </div>
 
-        <button type="submit" class="btn-primary submit-btn">
+        <button type="submit" class="btn-primary submit-btn" data-i18n="waitlist.btn">
           Registrarme
         </button>
       </form>
 
-      <p class="privacy-note">No spam. Solo updates importantes.</p>
+      <p class="privacy-note" data-i18n="waitlist.note">No spam. Solo updates importantes.</p>
     </div>
   </div>
 </section>

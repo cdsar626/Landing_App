@@ -1,0 +1,106 @@
+---
+---
+<div class="lang-switcher">
+  <button id="lang-btn-es" class="lang-btn active" title="Español">
+    <span class="flag">🇪🇸</span>
+  </button>
+  <button id="lang-btn-en" class="lang-btn" title="English">
+    <span class="flag">🇺🇸</span>
+  </button>
+</div>
+
+<style>
+  .lang-switcher {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    display: flex;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    padding: 0.4rem;
+    border-radius: 99px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 1000;
+  }
+
+  .lang-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s;
+    font-size: 1.2rem;
+    opacity: 0.5;
+    filter: grayscale(100%);
+  }
+
+  .lang-btn:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .lang-btn.active {
+    opacity: 1;
+    filter: grayscale(0%);
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  @media (max-width: 600px) {
+    .lang-switcher {
+      top: 1rem;
+      right: 1rem;
+    }
+  }
+</style>
+
+<script>
+  import { translations } from '../utils/i18n.js';
+
+  const btnEs = document.getElementById('lang-btn-es');
+  const btnEn = document.getElementById('lang-btn-en');
+
+  function updateLanguage(lang) {
+    // Update buttons
+    if (lang === 'es') {
+      btnEs.classList.add('active');
+      btnEn.classList.remove('active');
+    } else {
+      btnEn.classList.add('active');
+      btnEs.classList.remove('active');
+    }
+
+    // Save preference
+    localStorage.setItem('preferred-lang', lang);
+    document.documentElement.lang = lang;
+
+    // Update all translatable elements
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (translations[lang][key]) {
+        // Use innerHTML because some translations have <span> or <b>
+        el.innerHTML = translations[lang][key];
+      }
+    });
+
+    // Update placeholders
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      const key = el.getAttribute('data-i18n-placeholder');
+      if (translations[lang][key]) {
+        el.setAttribute('placeholder', translations[lang][key]);
+      }
+    });
+  }
+
+  btnEs.addEventListener('click', () => updateLanguage('es'));
+  btnEn.addEventListener('click', () => updateLanguage('en'));
+
+  // Init from localStorage or browser lang
+  const savedLang = localStorage.getItem('preferred-lang') || (navigator.language.startsWith('en') ? 'en' : 'es');
+  updateLanguage(savedLang);
+</script>
