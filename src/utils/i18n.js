@@ -37,7 +37,7 @@ export const translations = {
     "waitlist.select_state": "Selecciona un estado",
     "waitlist.btn": "Registrarme",
     "waitlist.note": "No spam. Solo updates importantes.",
-    "footer.rights": "© 2026 SlowMatch. Todos los derechos reservados."
+    "footer.rights": "© 2026 LatentMate. Todos los derechos reservados."
   },
   en: {
     "nav.waitlist": "Join the Pool",
@@ -77,6 +77,6 @@ export const translations = {
     "waitlist.select_state": "Select a state",
     "waitlist.btn": "Sign Me Up",
     "waitlist.note": "No spam. Only important updates.",
-    "footer.rights": "© 2026 SlowMatch. All rights reserved."
+    "footer.rights": "© 2026 LatentMate. All rights reserved."
   }
 };
