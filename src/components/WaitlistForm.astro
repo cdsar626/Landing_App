@@ -172,6 +172,14 @@ import { countries } from '../utils/countries.js';
       opt.addEventListener('click', () => selectCountry(country, lang));
       countryOptions.appendChild(opt);
     });
+
+    // --- UPDATE CURRENTLY SELECTED TEXT ---
+    if (countryValue.value) {
+      const selected = countries.find(c => c.code === countryValue.value);
+      if (selected) {
+        countryTriggerText.textContent = selected[lang];
+      }
+    }
   }
 
   function selectCountry(country, lang) {
