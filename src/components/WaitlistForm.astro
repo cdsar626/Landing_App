@@ -15,10 +15,7 @@ import { countries } from "../utils/countries.js";
         </p>
       </div>
 
-      <form
-        class="signup-form"
-        onsubmit="event.preventDefault(); alert('¡Gracias por registrarte! Te mantendremos informado.');"
-      >
+      <form class="signup-form" id="waitlist-form">
         <div class="input-group">
           <input
             type="email"
@@ -275,6 +272,59 @@ import { countries } from "../utils/countries.js";
       }, 50);
     }
   });
+
+  // --- Form Submission Logic ---
+  const form = document.getElementById("waitlist-form");
+  const submitBtn = form?.querySelector(".submit-btn");
+
+  if (form) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const emailInput = form.querySelector('input[type="email"]');
+      const email = emailInput.value;
+      const country = countryValue.value;
+      const state = stateValue.value;
+
+      if (!email || !country) {
+        // Simple validation check, though HTML 'required' handles most
+        return;
+      }
+
+      // Visual Feedback
+      const originalBtnText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Processing...";
+
+      try {
+        const res = await fetch("/api/join-waitlist", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, country, state: state || null }),
+        });
+
+        if (res.ok) {
+          alert("Success! Check your email for confirmation.");
+          form.reset();
+          // Reset custom inputs visual state
+          countryValue.value = "";
+          stateValue.value = "";
+          countryTriggerText.textContent = t("waitlist.select_country");
+          stateTriggerText.textContent = t("waitlist.select_state");
+          stateGroup.style.display = "none";
+        } else {
+          const data = await res.json();
+          alert("Something went wrong: " + (data.error || "Unknown error"));
+        }
+      } catch (error) {
+        console.error("Submission error:", error);
+        alert("Network error. Please try again.");
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalBtnText;
+      }
+    });
+  }
 </script>
 
 <style is:global>
