@@ -1,29 +1,34 @@
 ---
+
 ---
 
 <section class="hero-section">
   <div class="container hero-content">
     <div class="badge" data-i18n="hero.badge">Slow Dating Revolution</div>
     <h1 class="hero-title" data-i18n="hero.title">
-      Conecta como cuando <br/>
-      <span class="gradient-text">éramos niños.</span>
+      Connect just like <br />
+      <span class="gradient-text">we did as kids.</span>
     </h1>
     <p class="hero-subtitle" data-i18n="hero.subtitle">
-      Sin prejuicios. Jugando. Una app para buscar pareja (o amistades) basada en la esencia.
-      El tiempo es oro: demuestren interés para mantener la conexión viva.
+      No prejudice. Just playing. An app to find partners (or friends) based on
+      essence. Time is gold: show interest to keep the connection alive.
     </p>
-    
+
     <div class="cta-group">
-      <a href="#waitlist" class="btn-primary" data-i18n="nav.waitlist">Únete al Pool</a>
-      <a href="#features" class="btn-secondary" data-i18n="nav.features">Cómo funciona</a>
+      <a href="#waitlist" class="btn-primary" data-i18n="nav.waitlist"
+        >Únete al Pool</a
+      >
+      <a href="#features" class="btn-secondary" data-i18n="nav.features"
+        >Cómo funciona</a
+      >
     </div>
 
     <div class="hero-visual">
-       <!-- Abstract Avatar Representation -->
-       <div class="avatar-circle">
-          <div class="avatar-face"></div>
-          <div class="voice-wave"></div>
-       </div>
+      <!-- Abstract Avatar Representation -->
+      <div class="avatar-circle">
+        <div class="avatar-face"></div>
+        <div class="voice-wave"></div>
+      </div>
     </div>
   </div>
 </section>
@@ -40,14 +45,18 @@
   }
 
   .hero-section::before {
-    content: '';
+    content: "";
     position: absolute;
     top: -20%;
     left: 50%;
     transform: translateX(-50%);
     width: 800px;
     height: 800px;
-    background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, rgba(5, 5, 5, 0) 70%);
+    background: radial-gradient(
+      circle,
+      rgba(139, 92, 246, 0.15) 0%,
+      rgba(5, 5, 5, 0) 70%
+    );
     z-index: -1;
   }
 
@@ -151,13 +160,26 @@
   }
 
   @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-15px);
+    }
   }
 
   @keyframes pulse {
-    0% { width: 150px; height: 150px; opacity: 0.5; }
-    100% { width: 250px; height: 250px; opacity: 0; }
+    0% {
+      width: 150px;
+      height: 150px;
+      opacity: 0.5;
+    }
+    100% {
+      width: 250px;
+      height: 250px;
+      opacity: 0;
+    }
   }
 
   @media (max-width: 768px) {

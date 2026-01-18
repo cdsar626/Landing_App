@@ -1,24 +1,43 @@
 ---
-import { countries } from '../utils/countries.js';
+import { countries } from "../utils/countries.js";
 ---
 
 <section id="waitlist" class="waitlist-section">
   <div class="container">
     <div class="form-wrapper glass-panel">
       <div class="text-content">
-        <h2 data-i18n="waitlist.title">Únete a la <span class="gradient-text">Beta Exclusiva</span></h2>
-        <p data-i18n="waitlist.desc">Sé de los primeros en probar la experiencia. Los usuarios fundadores recibirán un ítem exclusivo para su Avatar.</p>
+        <h2 data-i18n="waitlist.title">
+          Join the <span class="gradient-text">Exclusive Beta</span>
+        </h2>
+        <p data-i18n="waitlist.desc">
+          Be among the first to experience it. Founding users will receive an
+          exclusive item for their Avatar.
+        </p>
       </div>
-      
-      <form class="signup-form" onsubmit="event.preventDefault(); alert('¡Gracias por registrarte! Te mantendremos informado.');">
+
+      <form
+        class="signup-form"
+        onsubmit="event.preventDefault(); alert('¡Gracias por registrarte! Te mantendremos informado.');"
+      >
         <div class="input-group">
-          <input type="email" data-i18n-placeholder="waitlist.email" placeholder="Tu correo electrónico" required class="input-field" />
+          <input
+            type="email"
+            data-i18n-placeholder="waitlist.email"
+            placeholder="Your email address"
+            required
+            class="input-field"
+          />
         </div>
-        
+
         <!-- Custom Country Selector -->
-        <div class="input-group custom-select-container" id="country-custom-container">
+        <div
+          class="input-group custom-select-container"
+          id="country-custom-container"
+        >
           <div class="custom-select-trigger" id="country-trigger">
-            <span id="country-trigger-text" data-i18n="waitlist.select_country">Selecciona un país</span>
+            <span id="country-trigger-text" data-i18n="waitlist.select_country"
+              >Select a country</span
+            >
             <div class="arrow"></div>
           </div>
           <div class="custom-options" id="country-options">
@@ -28,9 +47,15 @@ import { countries } from '../utils/countries.js';
         </div>
 
         <!-- Custom State Selector -->
-        <div id="state-group" class="input-group custom-select-container" style="display: none;">
+        <div
+          id="state-group"
+          class="input-group custom-select-container"
+          style="display: none;"
+        >
           <div class="custom-select-trigger" id="state-trigger">
-            <span id="state-trigger-text" data-i18n="waitlist.select_state">Selecciona un estado</span>
+            <span id="state-trigger-text" data-i18n="waitlist.select_state"
+              >Select a state</span
+            >
             <div class="arrow"></div>
           </div>
           <div class="custom-options" id="state-options">
@@ -88,94 +113,106 @@ import { countries } from '../utils/countries.js';
           <input type="hidden" id="state-value" name="state" />
         </div>
 
-        <button type="submit" class="btn-primary submit-btn" data-i18n="waitlist.btn">
-          Registrarme
+        <button
+          type="submit"
+          class="btn-primary submit-btn"
+          data-i18n="waitlist.btn"
+        >
+          Sign Me Up
         </button>
       </form>
 
-      <p class="privacy-note" data-i18n="waitlist.note">No spam. Solo updates importantes.</p>
+      <p class="privacy-note" data-i18n="waitlist.note">
+        No spam. Only important updates.
+      </p>
     </div>
   </div>
 </section>
 
 <script>
-  import { countries } from '../utils/countries.js';
-  import { translations } from '../utils/i18n.js';
+  import { countries } from "../utils/countries.js";
+  import { translations } from "../utils/i18n.js";
 
   // --- Utility: Get localized string ---
   function t(key) {
-    const lang = localStorage.getItem('preferred-lang') || 'es';
+    const lang = localStorage.getItem("preferred-lang") || "en";
     return translations[lang][key] || key;
   }
 
   // --- Logic for Country Selector ---
-  const countryTrigger = document.getElementById('country-trigger');
-  const countryOptions = document.getElementById('country-options');
-  const countryValue = document.getElementById('country-value');
-  const countryTriggerText = document.getElementById('country-trigger-text');
-  
-  const stateGroup = document.getElementById('state-group');
-  const stateTrigger = document.getElementById('state-trigger');
-  const stateOptions = document.getElementById('state-options');
-  const stateValue = document.getElementById('state-value');
-  const stateTriggerText = document.getElementById('state-trigger-text');
+  const countryTrigger = document.getElementById("country-trigger");
+  const countryOptions = document.getElementById("country-options");
+  const countryValue = document.getElementById("country-value");
+  const countryTriggerText = document.getElementById("country-trigger-text");
+
+  const stateGroup = document.getElementById("state-group");
+  const stateTrigger = document.getElementById("state-trigger");
+  const stateOptions = document.getElementById("state-options");
+  const stateValue = document.getElementById("state-value");
+  const stateTriggerText = document.getElementById("state-trigger-text");
 
   // Toggle dropdowns
-  countryTrigger.addEventListener('click', (e) => {
+  countryTrigger.addEventListener("click", (e) => {
     e.stopPropagation();
-    countryOptions.classList.toggle('open');
-    stateOptions.classList.remove('open');
+    countryOptions.classList.toggle("open");
+    stateOptions.classList.remove("open");
   });
 
-  stateTrigger.addEventListener('click', (e) => {
+  stateTrigger.addEventListener("click", (e) => {
     e.stopPropagation();
-    stateOptions.classList.toggle('open');
-    countryOptions.classList.remove('open');
+    stateOptions.classList.toggle("open");
+    countryOptions.classList.remove("open");
   });
 
   // Close when clicking outside
-  document.addEventListener('click', () => {
-    countryOptions.classList.remove('open');
-    stateOptions.classList.remove('open');
+  document.addEventListener("click", () => {
+    countryOptions.classList.remove("open");
+    stateOptions.classList.remove("open");
   });
 
   function populateCountryOptions() {
-    const lang = localStorage.getItem('preferred-lang') || 'es';
-    const topCodes = ['US', 'MX', 'ES'];
+    const lang = localStorage.getItem("preferred-lang") || "en";
+    const topCodes = ["US", "MX", "ES"];
     const sortedTop = [
-       countries.find(c => c.code === 'US'),
-       countries.find(c => c.code === 'MX'),
-       countries.find(c => c.code === 'ES')
+      countries.find((c) => c.code === "US"),
+      countries.find((c) => c.code === "MX"),
+      countries.find((c) => c.code === "ES"),
     ];
-    const otherList = countries.filter(c => !topCodes.includes(c.code)).sort((a,b) => a[lang].localeCompare(b[lang]));
+    const otherList = countries
+      .filter((c) => !topCodes.includes(c.code))
+      .sort((a, b) => a[lang].localeCompare(b[lang]));
 
-    countryOptions.innerHTML = '';
-    
+    countryOptions.innerHTML = "";
+
     // Add "Select Country" as internal option too if desired, or skip
-    sortedTop.forEach(country => {
-      const opt = document.createElement('div');
-      opt.className = 'custom-option' + (countryValue.value === country.code ? ' selected' : '');
+    sortedTop.forEach((country) => {
+      const opt = document.createElement("div");
+      opt.className =
+        "custom-option" +
+        (countryValue.value === country.code ? " selected" : "");
       opt.textContent = country[lang];
-      opt.addEventListener('click', () => selectCountry(country, lang));
+      opt.addEventListener("click", () => selectCountry(country, lang));
       countryOptions.appendChild(opt);
     });
 
     // --- ADD SEPARATOR ---
-    const separator = document.createElement('div');
-    separator.className = 'custom-separator';
+    const separator = document.createElement("div");
+    separator.className = "custom-separator";
     countryOptions.appendChild(separator);
 
-    otherList.forEach(country => {
-      const opt = document.createElement('div');
-      opt.className = 'custom-option' + (countryValue.value === country.code ? ' selected' : '');
+    otherList.forEach((country) => {
+      const opt = document.createElement("div");
+      opt.className =
+        "custom-option" +
+        (countryValue.value === country.code ? " selected" : "");
       opt.textContent = country[lang];
-      opt.addEventListener('click', () => selectCountry(country, lang));
+      opt.addEventListener("click", () => selectCountry(country, lang));
       countryOptions.appendChild(opt);
     });
 
     // --- UPDATE CURRENTLY SELECTED TEXT ---
     if (countryValue.value) {
-      const selected = countries.find(c => c.code === countryValue.value);
+      const selected = countries.find((c) => c.code === countryValue.value);
       if (selected) {
         countryTriggerText.textContent = selected[lang];
       }
@@ -183,55 +220,59 @@ import { countries } from '../utils/countries.js';
   }
 
   function selectCountry(country, lang) {
-    const countryValue = document.getElementById('country-value');
-    const countryTriggerText = document.getElementById('country-trigger-text');
-    const stateGroup = document.getElementById('state-group');
-    const stateValue = document.getElementById('state-value');
-    const stateTriggerText = document.getElementById('state-trigger-text');
-    const countryOptions = document.getElementById('country-options');
+    const countryValue = document.getElementById("country-value");
+    const countryTriggerText = document.getElementById("country-trigger-text");
+    const stateGroup = document.getElementById("state-group");
+    const stateValue = document.getElementById("state-value");
+    const stateTriggerText = document.getElementById("state-trigger-text");
+    const countryOptions = document.getElementById("country-options");
 
     countryValue.value = country.code;
     countryTriggerText.textContent = country[lang];
-    countryTriggerText.removeAttribute('data-i18n');
-    
-    if (country.code === 'US') {
-      stateGroup.style.display = 'block';
-      stateValue.setAttribute('required', 'true');
+    countryTriggerText.removeAttribute("data-i18n");
+
+    if (country.code === "US") {
+      stateGroup.style.display = "block";
+      stateValue.setAttribute("required", "true");
     } else {
-      stateGroup.style.display = 'none';
-      stateValue.removeAttribute('required');
-      stateValue.value = '';
-      stateTriggerText.textContent = t('waitlist.select_state');
+      stateGroup.style.display = "none";
+      stateValue.removeAttribute("required");
+      stateValue.value = "";
+      stateTriggerText.textContent = t("waitlist.select_state");
     }
-    countryOptions.classList.remove('open');
+    countryOptions.classList.remove("open");
   }
 
   // Handle existing state options
-  stateOptions.querySelectorAll('.custom-option').forEach(opt => {
-    opt.addEventListener('click', () => {
-      stateValue.value = opt.getAttribute('data-value');
+  stateOptions.querySelectorAll(".custom-option").forEach((opt) => {
+    opt.addEventListener("click", () => {
+      stateValue.value = opt.getAttribute("data-value");
       stateTriggerText.textContent = opt.textContent;
-      stateOptions.classList.remove('open');
+      stateOptions.classList.remove("open");
     });
   });
 
   // Re-run on language change
-  window.addEventListener('languageChanged', () => {
+  window.addEventListener("languageChanged", () => {
     populateCountryOptions();
-    if (!countryValue.value) countryTriggerText.textContent = t('waitlist.select_country');
-    if (!stateValue.value) stateTriggerText.textContent = t('waitlist.select_state');
+    if (!countryValue.value)
+      countryTriggerText.textContent = t("waitlist.select_country");
+    if (!stateValue.value)
+      stateTriggerText.textContent = t("waitlist.select_state");
   });
 
-  document.addEventListener('DOMContentLoaded', populateCountryOptions);
+  document.addEventListener("DOMContentLoaded", populateCountryOptions);
 
   // Click on flags
-  document.addEventListener('click', (e) => {
-    if (e.target.closest('.lang-btn')) {
-       setTimeout(() => {
-         populateCountryOptions();
-         if (!countryValue.value) countryTriggerText.textContent = t('waitlist.select_country');
-         if (!stateValue.value) stateTriggerText.textContent = t('waitlist.select_state');
-       }, 50);
+  document.addEventListener("click", (e) => {
+    if (e.target.closest(".lang-btn")) {
+      setTimeout(() => {
+        populateCountryOptions();
+        if (!countryValue.value)
+          countryTriggerText.textContent = t("waitlist.select_country");
+        if (!stateValue.value)
+          stateTriggerText.textContent = t("waitlist.select_state");
+      }, 50);
     }
   });
 </script>
@@ -313,7 +354,7 @@ import { countries } from '../utils/countries.js';
     overflow-y: auto;
     z-index: 500;
     display: none;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
   }
 
   .custom-options.open {
@@ -354,7 +395,7 @@ import { countries } from '../utils/countries.js';
     width: 6px;
   }
   .custom-options::-webkit-scrollbar-thumb {
-    background: rgba(255,255,255,0.2);
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 10px;
   }
 
