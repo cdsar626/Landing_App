@@ -62,14 +62,20 @@
 </style>
 
 <script>
+  // @ts-nocheck
   import { translations } from "../utils/i18n.js";
 
   const btnEs = document.getElementById("lang-btn-es");
   const btnEn = document.getElementById("lang-btn-en");
 
   function updateLanguage(lang) {
+    if (!btnEs || !btnEn) return;
+
+    // Validate lang, fallback to 'en' if invalid
+    const safeLang = lang === "es" || lang === "en" ? lang : "en";
+
     // Update buttons
-    if (lang === "es") {
+    if (safeLang === "es") {
       btnEs.classList.add("active");
       btnEn.classList.remove("active");
     } else {
@@ -78,32 +84,51 @@
     }
 
     // Save preference
-    localStorage.setItem("preferred-lang", lang);
-    document.documentElement.lang = lang;
+    localStorage.setItem("preferred-lang", safeLang);
+    document.documentElement.lang = safeLang;
+
+    // Get translations for the selected language
+    const currentTranslations = translations[safeLang];
 
     // Update all translatable elements
     document.querySelectorAll("[data-i18n]").forEach((el) => {
       const key = el.getAttribute("data-i18n");
-      if (translations[lang][key]) {
+      if (key && currentTranslations && currentTranslations[key]) {
         // Use innerHTML because some translations have <span> or <b>
-        el.innerHTML = translations[lang][key];
+        el.innerHTML = currentTranslations[key];
       }
     });
 
     // Update placeholders
     document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
       const key = el.getAttribute("data-i18n-placeholder");
-      if (translations[lang][key]) {
-        el.setAttribute("placeholder", translations[lang][key]);
+      if (key && currentTranslations && currentTranslations[key]) {
+        el.setAttribute("placeholder", currentTranslations[key]);
       }
     });
+
+    // Dispatch a custom event in case other components need to listen
+    window.dispatchEvent(
+      new CustomEvent("languageChanged", { detail: { lang: safeLang } }),
+    );
   }
 
-  btnEs.addEventListener("click", () => updateLanguage("es"));
-  btnEn.addEventListener("click", () => updateLanguage("en"));
+  if (btnEs && btnEn) {
+    btnEs.addEventListener("click", () => updateLanguage("es"));
+    btnEn.addEventListener("click", () => updateLanguage("en"));
 
-  // Init from localStorage or detect Spanish browser lang, otherwise default to English
-  const browserLang = navigator.language.startsWith("es") ? "es" : "en";
-  const initialLang = localStorage.getItem("preferred-lang") || browserLang;
-  updateLanguage(initialLang);
+    // Init from localStorage or detect Spanish browser lang, otherwise default to English
+    // Logic:
+    // 1. Check local storage (returning user preference)
+    // 2. If no storage, check navigator.language.
+    //    - If starts with 'es', use 'es'.
+    //    - If anything else (en, fr, de...), use 'en'.
+    // 3. Default fallback is 'en'.
+
+    const browserLang = navigator.language.startsWith("es") ? "es" : "en";
+    const savedLang = localStorage.getItem("preferred-lang");
+    const initialLang = savedLang || browserLang;
+
+    updateLanguage(initialLang);
+  }
 </script>

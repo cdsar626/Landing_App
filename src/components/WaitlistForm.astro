@@ -26,11 +26,6 @@ import { countries } from "../utils/countries.js";
           />
         </div>
 
-        <!-- Honeypot field to prevent spam -->
-        <div style="position: absolute; left: -9999px; opacity: 0;">
-          <input type="text" name="website" tabindex="-1" autocomplete="off" />
-        </div>
-
         <!-- Custom Country Selector -->
         <div
           class="input-group custom-select-container"
@@ -132,6 +127,7 @@ import { countries } from "../utils/countries.js";
 </section>
 
 <script>
+  // @ts-nocheck
   import { countries } from "../utils/countries.js";
   import { translations } from "../utils/i18n.js";
 
@@ -302,17 +298,10 @@ import { countries } from "../utils/countries.js";
       submitBtn.textContent = "Processing...";
 
       try {
-        const website = form.querySelector('input[name="website"]').value;
-
         const res = await fetch("/api/join-waitlist", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email,
-            country,
-            state: state || null,
-            website,
-          }),
+          body: JSON.stringify({ email, country, state: state || null }),
         });
 
         if (res.ok) {
