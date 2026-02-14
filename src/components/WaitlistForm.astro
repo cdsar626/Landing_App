@@ -26,6 +26,23 @@ import { countries } from "../utils/countries.js";
           />
         </div>
 
+        <!-- Custom Gender Selector -->
+        <div
+          class="input-group custom-select-container"
+          id="gender-custom-container"
+        >
+          <div class="custom-select-trigger" id="gender-trigger">
+            <span id="gender-trigger-text" data-i18n="waitlist.select_gender"
+              >Select your gender</span
+            >
+            <div class="arrow"></div>
+          </div>
+          <div class="custom-options" id="gender-options">
+            <!-- Populated by JS -->
+          </div>
+          <input type="hidden" id="gender-value" name="gender" required />
+        </div>
+
         <!-- Custom Country Selector -->
         <div
           class="input-group custom-select-container"
@@ -143,6 +160,11 @@ import { countries } from "../utils/countries.js";
   const countryValue = document.getElementById("country-value");
   const countryTriggerText = document.getElementById("country-trigger-text");
 
+  const genderTrigger = document.getElementById("gender-trigger");
+  const genderOptions = document.getElementById("gender-options");
+  const genderValue = document.getElementById("gender-value");
+  const genderTriggerText = document.getElementById("gender-trigger-text");
+
   const stateGroup = document.getElementById("state-group");
   const stateTrigger = document.getElementById("state-trigger");
   const stateOptions = document.getElementById("state-options");
@@ -154,18 +176,28 @@ import { countries } from "../utils/countries.js";
     e.stopPropagation();
     countryOptions.classList.toggle("open");
     stateOptions.classList.remove("open");
+    genderOptions.classList.remove("open");
   });
 
   stateTrigger.addEventListener("click", (e) => {
     e.stopPropagation();
     stateOptions.classList.toggle("open");
     countryOptions.classList.remove("open");
+    genderOptions.classList.remove("open");
+  });
+
+  genderTrigger.addEventListener("click", (e) => {
+    e.stopPropagation();
+    genderOptions.classList.toggle("open");
+    countryOptions.classList.remove("open");
+    stateOptions.classList.remove("open");
   });
 
   // Close when clicking outside
   document.addEventListener("click", () => {
     countryOptions.classList.remove("open");
     stateOptions.classList.remove("open");
+    genderOptions.classList.remove("open");
   });
 
   function populateCountryOptions() {
@@ -253,26 +285,63 @@ import { countries } from "../utils/countries.js";
   // Re-run on language change
   window.addEventListener("languageChanged", () => {
     populateCountryOptions();
+    populateGenderOptions();
     if (!countryValue.value)
       countryTriggerText.textContent = t("waitlist.select_country");
     if (!stateValue.value)
       stateTriggerText.textContent = t("waitlist.select_state");
+    if (!genderValue.value)
+      genderTriggerText.textContent = t("waitlist.select_gender");
   });
 
-  document.addEventListener("DOMContentLoaded", populateCountryOptions);
+  document.addEventListener("DOMContentLoaded", () => {
+    populateCountryOptions();
+    populateGenderOptions();
+  });
 
   // Click on flags
   document.addEventListener("click", (e) => {
     if (e.target.closest(".lang-btn")) {
       setTimeout(() => {
         populateCountryOptions();
+        populateGenderOptions();
         if (!countryValue.value)
           countryTriggerText.textContent = t("waitlist.select_country");
         if (!stateValue.value)
           stateTriggerText.textContent = t("waitlist.select_state");
+        if (!genderValue.value)
+          genderTriggerText.textContent = t("waitlist.select_gender");
       }, 50);
     }
   });
+
+  function populateGenderOptions() {
+    genderOptions.innerHTML = "";
+    const genders = [
+      { value: "male", label: t("waitlist.male") },
+      { value: "female", label: t("waitlist.female") },
+    ];
+
+    genders.forEach((g) => {
+      const opt = document.createElement("div");
+      opt.className =
+        "custom-option" + (genderValue.value === g.value ? " selected" : "");
+      opt.textContent = g.label;
+      opt.addEventListener("click", () => selectGender(g));
+      genderOptions.appendChild(opt);
+    });
+
+    if (genderValue.value) {
+      const selected = genders.find((g) => g.value === genderValue.value);
+      if (selected) genderTriggerText.textContent = selected.label;
+    }
+  }
+
+  function selectGender(g) {
+    genderValue.value = g.value;
+    genderTriggerText.textContent = g.label;
+    genderOptions.classList.remove("open");
+  }
 
   // --- Form Submission Logic ---
   const form = document.getElementById("waitlist-form");
@@ -286,8 +355,9 @@ import { countries } from "../utils/countries.js";
       const email = emailInput.value;
       const country = countryValue.value;
       const state = stateValue.value;
+      const gender = genderValue.value;
 
-      if (!email || !country) {
+      if (!email || !country || !gender) {
         // Simple validation check, though HTML 'required' handles most
         return;
       }
@@ -301,7 +371,12 @@ import { countries } from "../utils/countries.js";
         const res = await fetch("/api/join-waitlist", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, country, state: state || null }),
+          body: JSON.stringify({
+            email,
+            country,
+            state: state || null,
+            gender,
+          }),
         });
 
         if (res.ok) {
@@ -310,8 +385,10 @@ import { countries } from "../utils/countries.js";
           // Reset custom inputs visual state
           countryValue.value = "";
           stateValue.value = "";
+          genderValue.value = "";
           countryTriggerText.textContent = t("waitlist.select_country");
           stateTriggerText.textContent = t("waitlist.select_state");
+          genderTriggerText.textContent = t("waitlist.select_gender");
           stateGroup.style.display = "none";
         } else {
           const data = await res.json();

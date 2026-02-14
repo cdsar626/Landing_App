@@ -35,6 +35,10 @@ export const translations = {
     "waitlist.select_country": "Selecciona un país",
     "waitlist.state": "Estado",
     "waitlist.select_state": "Selecciona un estado",
+    "waitlist.gender": "Género",
+    "waitlist.select_gender": "Selecciona tu género",
+    "waitlist.male": "Hombre",
+    "waitlist.female": "Mujer",
     "waitlist.btn": "Registrarme",
     "waitlist.note": "No spam. Solo updates importantes.",
     "footer.rights": "© 2026 LatentMate. Todos los derechos reservados."
@@ -75,6 +79,10 @@ export const translations = {
     "waitlist.select_country": "Select a country",
     "waitlist.state": "State",
     "waitlist.select_state": "Select a state",
+    "waitlist.gender": "Gender",
+    "waitlist.select_gender": "Select your gender",
+    "waitlist.male": "Male",
+    "waitlist.female": "Female",
     "waitlist.btn": "Sign Me Up",
     "waitlist.note": "No spam. Only important updates.",
     "footer.rights": "© 2026 LatentMate. All rights reserved."
