@@ -24,10 +24,10 @@
     </div>
 
     <div class="hero-visual">
-      <!-- Abstract Avatar Representation -->
-      <div class="avatar-circle">
-        <div class="avatar-face"></div>
-        <div class="voice-wave"></div>
+      <!-- Abstract Heart Representation -->
+      <div class="abstract-heart">
+        <div class="heart-shape"></div>
+        <div class="heart-pulse"></div>
       </div>
     </div>
   </div>
@@ -44,24 +44,24 @@
     overflow: hidden;
   }
 
-  /* Removed dark overlay to match playful theme */
-
   .hero-content {
     text-align: center;
     max-width: 800px;
+    z-index: 5;
   }
 
   .badge {
     display: inline-block;
     padding: 0.5rem 1rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 2rem;
     font-size: 0.875rem;
-    color: var(--color-primary);
+    color: white;
     margin-bottom: 1.5rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
+    backdrop-filter: blur(5px);
   }
 
   .hero-title {
@@ -70,11 +70,12 @@
     line-height: 1.1;
     margin-bottom: 1.5rem;
     letter-spacing: -0.02em;
+    color: white;
   }
 
   .hero-subtitle {
     font-size: 1.125rem;
-    color: var(--color-text-muted);
+    color: rgba(255, 255, 255, 0.9);
     margin-bottom: 2.5rem;
     max-width: 600px;
     margin-left: auto;
@@ -90,81 +91,109 @@
 
   .btn-secondary {
     padding: 0.75rem 2rem;
-    color: var(--color-text-main);
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 9999px;
     font-weight: 600;
     transition: all 0.2s;
   }
 
   .btn-secondary:hover {
-    border-color: var(--color-text-main);
-    background: rgba(255, 255, 255, 0.05);
+    border-color: white;
+    background: rgba(255, 255, 255, 0.2);
   }
 
-  /* Abstract Visual */
+  /* Abstract Heart Visual */
   .hero-visual {
-    margin-top: 2rem;
+    margin-top: 3rem;
     display: flex;
     justify-content: center;
-  }
-
-  .avatar-circle {
-    width: 150px;
-    height: 150px;
-    background: linear-gradient(135deg, #1e1e1e, #121212);
-    border-radius: 50%;
     position: relative;
-    box-shadow: 0 0 40px rgba(139, 92, 246, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    height: 150px;
+  }
+
+  .abstract-heart {
+    position: relative;
+    width: 120px;
+    height: 120px;
     animation: float 6s ease-in-out infinite;
+    z-index: 10;
   }
 
-  .avatar-face {
+  .heart-shape {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center strictly */
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, #f472b6, #db2777);
+    box-shadow: 0 0 30px rgba(219, 39, 119, 0.4);
+
+    /* Organic "Morphing" Heart-ish Shape */
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    animation: morph-heart 8s ease-in-out infinite;
+  }
+
+  /* Keyframes for the organic morphing effect */
+  @keyframes morph-heart {
+    0% {
+      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+    33% {
+      border-radius: 50% 50% 40% 40% / 50% 50% 70% 60%;
+    }
+    /* The "Heart" Moment: Wide top, tappered bottom, nearly symmetrical */
+    50% {
+      border-radius: 50% 50% 25% 25% / 55% 55% 85% 85%;
+      box-shadow: 0 0 50px rgba(219, 39, 119, 0.6); /* Glow intense */
+    }
+    66% {
+      border-radius: 40% 60% 30% 70% / 55% 30% 75% 45%;
+    }
+    100% {
+      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+  }
+
+  /* Pulse stays as a subtle circular echo behind */
+  .heart-pulse {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 80px;
-    height: 80px;
-    background: var(--gradient-main);
-    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-    opacity: 0.8;
-  }
-
-  .voice-wave {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 200px;
-    height: 200px;
-    border: 1px solid rgba(139, 92, 246, 0.3);
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 50%;
-    animation: pulse 3s infinite;
+    animation: pulse-ring 3s infinite;
+    z-index: -1;
+    pointer-events: none;
   }
 
   @keyframes float {
     0%,
     100% {
-      transform: translateY(0);
+      transform: translateY(0) scale(1);
     }
     50% {
-      transform: translateY(-15px);
+      transform: translateY(-15px) scale(1.05);
     }
   }
 
-  @keyframes pulse {
+  @keyframes pulse-ring {
     0% {
-      width: 150px;
-      height: 150px;
-      opacity: 0.5;
+      width: 100px;
+      height: 100px;
+      opacity: 0.6;
+      transform: translate(-50%, -50%);
     }
     100% {
-      width: 250px;
-      height: 250px;
+      width: 280px;
+      height: 280px;
       opacity: 0;
+      transform: translate(-50%, -50%);
     }
   }
 
